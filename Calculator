@@ -1,0 +1,407 @@
+//Name: Ali Jaafar Sannan
+//date: 2023/03/27
+//104414723.c
+// This program implements a command-line calculator, in which a user can choose between a range of mathematic operations and arithmetic
+#include <stdio.h>
+#include<math.h>
+#include<string.h>
+
+void reset();//forward declaration of function
+char getVariable();//forward decleration of function
+
+int main(){
+   printf("Welcome to my Command-Line Calculator (CLC)\n");
+   printf("Developer: Ali Jaafar Sannan\n");
+   printf("Version: 2\n");
+   printf("Date: 2023/03/27\n");
+   printf("----------------------------------------------------------\n\n");
+   //option stores users input for the option that have selected relating to the type of mathematical operation they would like to conduct
+   char option, name, option2, q;
+   // stores numbers used for mathematical operations
+   float num1;
+   float num2;
+   float result;
+   float value;
+   //stores the operation type that the user would like executed
+   char operator;
+   //the loop will break once the counter is set to 0
+   int counter=1, counter2=1;
+   int check;
+  
+   
+   // shows prompt for main menu
+   printf("Select one of the following items: \n");
+   printf("B) - Binary Mathematical Operations, such as addition and subtraction.\n");
+   printf("U) - Unary Mathematical operations, such as square root, and log.\n");
+   printf("A) - Advances Mathematical Operations, using variables, arrays.\n");
+   printf("V) - Define variables and assign them values.\n");
+   printf("E) - Exit\n");
+   //taking user input for option
+  
+do
+{ //Loop to keep calculator operational 
+  
+    do//input validation
+    {
+      scanf("\n%c", &option);
+
+      if (option != 'b' && option != 'B' && option != 'u' && option != 'U' && option != 'a' && option != 'A' && option != 'v' && option != 'V' && option != 'e' && option != 'E') 
+      {
+        printf("Invalid option, try again!\n");
+        
+      }
+      
+    } while (option != 'b' && option != 'B' && option != 'u' && option != 'U' && option != 'a' && option != 'A' && option != 'v' && option != 'V' && option !='e' && option != 'E');
+    
+   //do while Loop { for asking the user to input their option}
+   
+      //switch case (allows the user to execute different operations based on the user's input)
+   switch(option){
+       case 'B'://
+       case 'b':
+            do
+        {
+          printf("Enter first number\n");// user enters first number
+          check = scanf("\n%f", &num1);//checks to see if input is a number
+
+          if (check != 1)//if input not a number
+          {
+            printf("invalid input, try again!\n");
+            reset();// resets scanf("\n%f", &num1)
+          }
+
+        } while (check != 1);// keeps asking user to input number until one is inputed
+        reset();
+        do
+        {
+           printf("Please enter the operation (+ , - , * , /, P, X, I, %% ):\n");//asks user to input operation
+           scanf("\n%c", &operator);
+           
+        if (operator != '+' && operator != '-' && operator != '*' && operator != '/' && operator != 'P' && operator != 'p' && operator != 'X' && operator != 'x' && operator != 'I' && operator != 'i' && operator != '%')
+          {
+            printf("invalid operator, try again!\n");
+          }
+          
+        }while (operator != '+' && operator != '-' && operator != '*' && operator != '/' && operator != 'P' && operator != 'p' && operator != 'X' && operator != 'x' && operator != 'I' && operator != 'i' && operator != '%');
+           // keeps asking user to input operation until a valid one is inputed
+        do
+        {
+          printf("Enter second number\n");
+          check = scanf("\n%f", &num2);
+
+          if (check != 1)
+          {
+            printf("invalid input, try again!\n");
+            reset();
+          }
+          reset();
+          if (num2 == 0 && operator == '/')
+          {
+            printf("Cannot divide by zero\n");
+          }
+         }while (check != 1 || num2 == 0 && operator == '/');// keeps asking user to input number until a non-zero number is inputed while the operator selected is a dvision.
+           
+           switch (operator){// nest switch(operator) within switch(option) 
+               case '+':
+                   printf("The result is %.2f\n",(num1+num2));//addition
+                   break;
+               case '-':
+                   printf("The result is %.2f\n",(num1-num2));//subtraction
+                   break;
+               case '*':
+                   printf("The result is %.2f\n",(num1*num2));//multiplication
+                   break;
+               case '/':
+                   printf("The result is %.2f\n",((float)(num1)/num2));//division
+                   break;
+                case 'P': 
+                case 'p':
+                   printf("The Result is: %.2f\n", pow(num1,num2));//power
+                   break;
+                case 'X':
+                case 'x':
+                if (num1 > num2){
+                    result = num1; }
+                            else 
+                            result = num2;
+                             printf("The Result is: %.2f\n", result);
+                    break;
+                 case 'I': if (num1 < num2) {
+                             result = num1; }
+                             else 
+                             result = num2;
+                             printf("The Result is: %.2f\n", result);
+                     break;
+      
+                case '%': result = fmod( num1, num2);
+                 printf("The Result is: %.2f\n", result);
+                 break;
+                default: printf("Error! Try again\n");
+           }
+      printf("Please select your option ( B , U , A , V, E )\n");
+      break;
+
+       case 'U':
+       case 'u':
+           do
+        {
+          printf("Enter number\n");
+          check = scanf("\n%f", &num1);
+
+          if (check != 1)
+          {
+            printf("invalid input, try again!\n");
+            reset();
+          }
+
+        } while (check != 1);
+        reset();
+        do
+        {
+          printf("Choose an operator (S, L, X, c, F)\n");
+          scanf("\n%c", &operator);
+
+          if (operator != 'S' && operator != 's' && operator != 'L' && operator != 'l'  && operator != 'E' && operator != 'e' && operator != '/' && operator != 'C' && operator != 'c' && operator != 'F' && operator != 'f')
+          {
+            printf("invalid operator, try again!\n");
+          }
+          
+        } while (operator != 'S' && operator != 's' && operator != 'L' && operator != 'l'  && operator != 'E' && operator != 'e' && operator != '/' && operator != 'C' && operator != 'c' && operator != 'F' && operator != 'f');
+    
+    switch (operator)
+    {
+      case 'S':
+      case 's': 
+      result = sqrt(num1); printf("The Result is: %.2f\n", result);
+        break;
+      case 'L':
+      case 'l':
+       result = log(num1); printf("The Result is: %.2f\n", result);
+        break;
+      case 'E':
+      case 'e':
+       result = exp(num1); printf("The Result is: %.2f\n", result);
+        break;
+      case 'C':
+      case 'c':
+      result = ceil(num1); printf("The Result is: %.2f\n", result);
+        break;
+      case 'F':
+      case 'f':
+       result = floor(num1); printf("The Result is: %.2f\n", result);
+        break;
+      default: printf("invalid input! Try again\n");
+    }
+    printf("Please select your option ( B , U , A , V, E )\n");
+     break;
+       
+       case 'A':
+       case 'a':
+       counter2 = 1;
+       while(counter2 != 0){
+    do
+    {
+      reset();
+      printf("Please select your option ( B , U or E )\n");
+      scanf("%c", &option2);
+
+      if (option2 != 'b' && option2 != 'B' && option2 != 'u' && option2 != 'U' && option2 != 'e' && option2 != 'E') 
+      {
+        printf("invalid input, try again!\n");
+      }
+      
+    } while (option2 != 'b' && option2 != 'B' && option2 != 'u' && option2 != 'U' && option2 != 'e' && option2 != 'E');
+    
+    switch (option2)
+    {
+    case 'b':
+    case 'B': 
+        printf("Choose your first number or variable (a to e)\n");
+        scanf("%f", &num1);
+      
+        do
+        {
+          reset();
+          printf("Choose operator\n");
+          scanf("\n%c", &operator);
+
+          if (operator != '+' && operator != '-' && operator != '*' && operator != '/' && operator != 'P' && operator != "p" && operator != 'X' && operator != 'x' && operator != 'I' && operator != 'i' && operator != '%')
+          {
+            printf("invalid operator, try again!\n");
+          }
+        } while (operator != '+' && operator != '-' && operator != '*' && operator != '/' && operator != 'P' && operator != "p" && operator != 'X' && operator != 'x' && operator != 'I' && operator != 'i' && operator != '%');
+        
+        printf("Choose your second number\n");
+        scanf("%f", &num2);
+          
+      switch (operator)//switch between operation chosen by user
+      {
+       case '+':
+                   printf("The result is %.2f\n",(num1+num2));
+                   break;
+       case '-':
+                   printf("The result is %.2f\n",(num1-num2));
+                   break;
+       case '*':
+                   printf("The result is %.2f\n",(num1*num2));
+                   break;
+       case '/':
+                   printf("The result is %.2f\n",((float)(num1)/num2));
+                   break;
+      case 'P':
+      case 'p':   
+                   printf("The Result is: %.2f\n", pow(num1,num2));
+        break;
+      case 'X':
+      case 'x':
+       if (num1 > num2)
+      {
+        result = num1;
+      }
+      else 
+      result = num2;
+      printf("The Result is: %.2f\n", result);
+        break;
+        case 'I': 
+        if (num1 < num2)
+      {
+        result = num1;
+      }
+      else
+       result = num2;
+      printf("The Result is: %.2f\n", result);
+        break;
+      
+      case '%': result = fmod( num1, num2); printf("The Result is: %.2f\n", result);
+        break;
+      default: printf("Error! Try again\n");
+      }
+      break;
+      case 'U':
+      case 'u':
+      do
+        {
+          printf("Enter number\n");
+          check = scanf("\n%f", &num1);
+
+          if (check != 1)
+          {
+            printf("invalid input, try again!\n");
+            reset();
+          }
+
+        } while (check != 1);
+        reset();
+        do
+        {
+          printf("Choose an operator (S, L, X, c, F)\n");
+          scanf("\n%c", &operator);
+
+          if (operator != 'S' && operator != 's' && operator != 'L' && operator != 'l'  && operator != 'E' && operator != 'e' && operator != '/' && operator != 'C' && operator != 'c' && operator != 'F' && operator != 'f')
+          {
+            printf("invalid operator, try again!\n");
+          }
+          
+        } while (operator != 'S' && operator != 's' && operator != 'L' && operator != 'l'  && operator != 'E' && operator != 'e' && operator != '/' && operator != 'C' && operator != 'c' && operator != 'F' && operator != 'f');
+    
+    switch (operator)
+    {
+      case 'S':
+      case 's': 
+      result = sqrt(num1); printf("The Result is: %.2f\n", result);
+        break;
+      case 'L':
+      case 'l':
+       result = log(num1); printf("The Result is: %.2f\n", result);
+        break;
+      case 'E':
+      case 'e':
+       result = exp(num1); printf("The Result is: %.2f\n", result);
+        break;
+      case 'C':
+      case 'c':
+      result = ceil(num1); printf("The Result is: %.2f\n", result);
+        break;
+      case 'F':
+      case 'f':
+       result = floor(num1); printf("The Result is: %.2f\n", result);
+        break;
+      default: printf("invalid input! Try again\n");
+    }
+    break;
+    case 'E':
+    case 'e':
+    counter2 = 0;
+    break;
+    }
+       }
+    printf("Please select your option ( B , U , A , V, E )\n");
+     
+      break;
+       
+    
+       case 'V':
+       case 'v':
+         reset();
+        name = getVariable();// sets varaible name to the getVariable() function
+        do
+        {
+          printf("Please enter a value to set to the variable\n");
+          check = scanf("%f", &value);
+          
+          if (check != 1)
+          {
+            printf("invalid input, try again!\n");
+            reset();
+          }
+          
+        } while (check != 1);
+        
+        printf("Variable name is '%c' and it's value is %.2f\n", name, value);
+        printf("Please select your option ( B , U , A , V, E )\n");
+      break;
+           
+       case 'E':
+       case 'e':
+           //if user enters E counter is set to 0, so that the loop will break
+           counter=0;
+           printf("Thanks for using my Simple Calculator. Hope to see you soon again, Goodbye!\n");
+           break;
+       default:
+           printf("Invalid input");
+           printf("Please select your option ( B , U , A , E , V)\n");
+           scanf(" %c",&option);
+           }
+       
+} while(counter);// condition has been met since counter = 0 when user inputs "E"
+ 
+}
+
+void reset()// function used to reset clogged value in scanf, fixes infinte loop while trying to validate input 
+{
+  char q = ' ';
+
+  while (q != '\n')
+  {
+      scanf("%c", &q);
+  }
+}
+
+char getVariable()// function used to create and name a varialbe and assign it a value
+{
+char var[2];
+printf("Create a variable. Variable name should be a single character between 'a' and 'e'\n");
+gets(var);
+
+if (strlen(var) > 1)
+        {
+          return getVariable();
+        }
+        if (var[0] != 'a' && var[0] != 'b' && var[0] != 'c' && var[0] != 'd' && var[0] != 'e')
+        {
+          return getVariable();
+        }
+  return var[0];
+}
+
+//end program
